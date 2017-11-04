@@ -9,8 +9,6 @@ import android.widget.Toast;
 import com.coderefer.rxandroidexamples.R;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -25,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+//    code to initialize Observable
     private void initializeObservable() {
         mObservable = Observable.create(e -> {
             for(int i=1; i<=5;i++){
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+//    Code to initialize Observer
     private void initializeObserver() {
         mObserver = new Observer<Integer>() {
             @Override
@@ -58,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+//    method which will be called on button click
     public void performAction(View view) {
         initializeObservable();
         initializeObserver();
+//        subscribing observer to observable
         mObservable.subscribe(mObserver);
     }
 }
