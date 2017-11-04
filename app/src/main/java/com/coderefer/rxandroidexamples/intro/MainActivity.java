@@ -2,6 +2,7 @@ package com.coderefer.rxandroidexamples.intro;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -22,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initializeObservable();
-        initializeObserver();
-        mObservable.subscribe(mObserver);
     }
 
     private void initializeObservable() {
@@ -65,4 +62,9 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    public void performAction(View view) {
+        initializeObservable();
+        initializeObserver();
+        mObservable.subscribe(mObserver);
+    }
 }
