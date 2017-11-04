@@ -26,15 +26,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeObservable() {
-        mObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-
-                for(int i=1; i<=5;i++){
-                    e.onNext(i);
-                }
-                e.onComplete();
+        mObservable = Observable.create(e -> {
+            for(int i=1; i<=5;i++){
+                e.onNext(i);
             }
+            e.onComplete();
         });
     }
 
