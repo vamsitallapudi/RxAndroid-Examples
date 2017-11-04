@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class MainActivity extends AppCompatActivity {
+public class SimpleRxAndroidActivity extends AppCompatActivity {
 
     private Observable<Integer> mObservable;
     private Observer<Integer> mObserver;
@@ -38,22 +38,22 @@ public class MainActivity extends AppCompatActivity {
         mObserver = new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Toast.makeText(MainActivity.this, "onSubscribe called", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SimpleRxAndroidActivity.this, "onSubscribe called", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNext(Integer integer) {
-                Toast.makeText(MainActivity.this, "onNext called: " + integer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SimpleRxAndroidActivity.this, "onNext called: " + integer, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(Throwable e) {
-                Toast.makeText(MainActivity.this, "onError called", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SimpleRxAndroidActivity.this, "onError called", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onComplete() {
-                Toast.makeText(MainActivity.this, "onComplete called", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SimpleRxAndroidActivity.this, "onComplete called", Toast.LENGTH_SHORT).show();
             }
         };
     }
