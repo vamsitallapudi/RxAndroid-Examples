@@ -1,67 +1,54 @@
+sudo: required
+
 language: android
 jdk: oraclejdk8
-sudo: false
-
-notifications:
-    email:
-        - xyz@example.com
-
-env:
-    matrix:
-        - ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
-    global:
-        - ADB_INSTALL_TIMEOUT=10    #Time out to 10 mins
 
 before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
-  directories:      #Cache all dirs under .gradle folder
-    - $HOME/.gradle/daemon      #Cache daemon logs
-    - $HOME/.gradle/native      #Cache library downloaded from the gradle dependency
-    - $HOME/.gradle/wrapper     #Cache the gradle
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+
+env:
+ global:
+ - ANDROID_API=26
+ - ANDROID_BUILD_TOOLS=26.0.2
+ - ADB_INSTALL_TIMEOUT=5 # Minutes.
+ - secure: "HFQl8xoFyrfOMV/Ewe16mIROvB9BmC5Y7sCnR6ZNk86F1AEzzTXMuXpCFL9bJ4W+spez70ab+2wiAwCbpP01RQYLvEC0gIa7EhOQlg0eSZS1TVZEB4vASOV6eBc/FXoiYEjOV2rc8ycP48BOl8XCeK7HkesVH+O5HEui0nYvLaMJNol+9RHVlOBwk7S/AqcJC1J0dIWNDPV6g7dzAqyvqDuh7UNbbLjS04e8qiu3ezky78SZAD3VxkwxZLPcQ04Ehxkp3UC63i84T1cCeHHPkzpmEJLy1SnRzQ4OQLPlHZw8KkPiK6g6VWBJk+Oqh8mmcdwirVzExpVMcP8xJRcKMWqWjsK0rLM1g+gyW4tZg+g+y6FRqfOEXxMlcrBXTHaMM1gGeLwIwyHjhVM4yF4pCttsJUnIQ4x1xEI3qpie/QTmyAui486LWJxfXGyyUACZGgt4s2OpcX2E1Eqf0tJdSf6vWJkf2A9AgjaWSlfCmzmH1uGSSNdVhp+HAru1gX57eOXYcAuIPtaSPS1YSbNADEv1sgxzl889pEmzO1wqaVcthw+c1nSNiEt3/HlkuJ9rs01kX8/hzNwQnsO9Ka1y92xWS8+5YB/KH/y5LEZQc30MYbMFQtt20A90c+GjNeZKfqgxy0hh2rvNqnfG5eu3fkui1uyZrkdr9vOBVkjeSoA=" # storepass
+ - secure: "D5rdnl0o5yrwHrejFDz9ulOj/kJNiO9egDBTudeFd6bb++XWeU7ForE3mzldn6qzCX4Gz+gHDVuySPzKuvw1Oe2hfAX61vsqWyFFoxZci6M2TR84Fuy4H1KIYxfaUyk79NmvlvPvgc9+MKV02k9v86DxisjCz/vz3Usmp2tlVEo1s4gbwLyCM4XEYP0slOrKYW2quEIu106vTwAzmWVkwMnoShOevJVIIMe/ThQw4oSlQyxTvCR77xSWTu6VKeVcuH2VWP78jBoQbpgxoFliLcTco7iPK3+1xsJUsZgoRK+l/0H0Q2hli30Pw9FJDPTnuTpBjfPI1tPIIyh4kx59krZn4+bkGJuI67jl7nC4IxK/ygWM7wKV38ntvA4ZdoHxLy9VhKQu3RoCe6Erp6/LDVqNA6lDr6EhooTGFE62bzVXbRmh3e4j6f08MaY9e8uWxyEOk7jmrj8m1og/izcr6bs/sDST95TVoKDpkPODxwEEuVTS2aN3Glu/C85EInOB7xIP9re6rFbtTjyj6Zyytjt5izRPU8JnFArdGwLSAp9JB8wjfhYm5rNyS63zngXtm8RruCHWPBtPWNYlMFXozIs1D0mPqtM/hth03l0fD350UI3RPCFQhXLp2x9vCW+yHG4qAECgk5px2nmnMspOno7n2KU6MOHYQZRzORUYryk=" # keypass
+ - secure: "B9Jb/cf1GLO8fdQaL8ObijchwIJNvVRUvtRIUBxA8o8z8f+HbKTIElB0LCjz4SWmeos4oGPdUSYZIbRFy9YYeiBDNP7hGp3p3jQVrlvYp4dZvuPYYffurw5oWIcjDctgPNPbu7K5OJpAba5itYKvW4aNou6MPnTke9i40DtIGy139SeKsg9P4AC2e+MsTITuUgQx0xQ6rcFZ+Nxuh8JZ5tLnn61DoVpoMaoIvsgenvupRun47eOieYxd99t4zBE4K6ZYGVc1yUKFodxut/AaaSe+/iFhhdL0s4k4g9nTJ7PKTTlc/gm7YmhvHWpnM3MdxtUZ9bEhIE8U76WbWpbsiaR1JeeeqqUd2SKYJYf/EK4rr15Gu6L4CqwKWfIaJz0pAR/rVs4it1/Xi95d3JDeZ3mlaWbXVKucVsvf85Cf8Q6mwFyII51ePuBUuoI8Soj7ICuijewv2dOaBZsF9tcyZgIS+hhmey6Fzx+vUeoEsqWqPuvmvbeErMxk0QNQGEdA3/BibXV36kN0wIxGUNFO67T8sZklzd+3voA9WL5sNHUBsZgZbScNHmc1JdZklh0+mfuwturXkbdlb3sHMmRVW+kmVe1lkLszLi87nvXcZW/8HNj/nnsOsMm5dlmbn9t4rh26VpoxiFLKnJ4DAe4vP7RGvF3Ymjt+69vW+oF6XOM=" # GH_TOKEN
 
 android:
-    update_sdk: true
-    components:
-    - tools
-    - platform-tools
-    - tools # appears twice as per Travis docs
-    - build-tools-26.1.0
-    - android-26
-
-    # Additional components
-    - extra-android-support
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-
-    #system images
-    - sys-img-armeabi-v7a-android-26
-
-licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
-
-before_script:
-    - chmod +x gradlew      #Grand permissions
-    - android list targets
-    - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI    #Create AVD for given api
-    - emulator -avd test -no-skin -no-audio -no-window &    #Start emulator
+  components:
+  - tools
+  - tools # Running this twice get's the latest build tools (https://github.com/codepath/android_guides/wiki/Setting-up-Travis-CI)
+  - platform-tools
+  - android-${ANDROID_API}
+  - build-tools-${ANDROID_BUILD_TOOLS}
+  - extra
 
 script:
-      - echo no | avdmanager create avd --force -n test -k "system-images;android-19;default;armeabi-v7a"
-      - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
-      - android-wait-for-emulator
-    - adb devices   #Display list of devices
-    - adb shell input keyevent 82 &
-    - ./gradlew connectedCheck -PdisablePreDex --stacktrace
+- "./gradlew clean test build"
 
-before_install:
-    - pip install --user codecov    #Install codecov
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_657e27e4d3ee_key -iv $encrypted_657e27e4d3ee_iv -in keystore.jks.enc -out keystore.jks -d
+- cd app/build/outputs/apk/release
+- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ${TRAVIS_BUILD_DIR}/keystore.jks -storepass $storepass -keypass $keypass app-release-unsigned.apk key0
+- jarsigner -verify app-release-unsigned.apk
+- "${ANDROID_HOME}/build-tools/${ANDROID_BUILD_TOOLS}/zipalign -v 4 app-release-unsigned.apk TravisAndroid.apk"
+- cd -
+- scripts/tag.sh
 
-after_success:
-    - codecov                       #Run codecov
-
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
+deploy:
+  provider: releases
+  on:
+    branch: master
+  api_key:
+    secure: "ptnNHl48bo/+i6WeymXskt0GamJBMpT6ghP5Wp4pQ0HAyOR2GUh5T/EqTE7I+SXLGs7iX0eUG65umRbdtWA0FrgrD073wj1zJ25WIV86V8Et+806nRhlfpH1e8mOCIAmpqiKZ7l9Jyd2HiGQ8KrDrX7pGg2uiCtwh7+6j0HMD9nF2U0p11YJrJnb7RvwcyuCZiwRgzNARKi/kCBPsaTh6AVR4FvMPvpP9THkCBQWkaG/C7t3Tgzj+oJJgonfBvftn3h/1t80IcNBVHEysvJpqZtY/mPrsnHPIN/od6bqRtRafIT4JQ2zOxQ7H9qdjiHWRwbDEITv1BoyYCKJxSo2BT684hV8tHqoqjJnDkRHD8Zfx4sQICmWcJ6zQ+iFhpNVSVmi09rx5UNDi8QXfhbIATrVvGjRjLzFAl1IumVp0mKAiTHTlg+k/aeIR3LqKRnoSx8+lTvzvcucyWh3hqtTabJduGErMbl0QdZR/MIYT5ELG8EFOw0OrCuEZP9QmLB5UEBgs808get0q58B7+MRX8cWV5l6dTCvqPTEX3hcmtOc4qtR2QCNi9x/XnY1T+u0bQWKKpWbZsVDPXZ6PStXTWsSmz5CL0gQI2EAhtDd6jaQJq+UpLCt5YaJ2VGY8ogAWeYt5fUqGd4lsLHUoS3405ecG9ou5InOvxuMOUcYJaI="
+  file: "app/build/outputs/apk/release/TravisAndroid.apk"
+  overwrite: true
+  skip_cleanup: true
