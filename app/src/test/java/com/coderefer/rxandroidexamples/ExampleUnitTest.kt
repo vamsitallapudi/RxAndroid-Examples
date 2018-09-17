@@ -33,4 +33,21 @@ class ExampleUnitTest {
         }
         observable.subscribe { System.out.println("next: $it") }
     }
+
+    @Test
+    fun testCreate_withSubscriberDuplicate() {
+        val observable = Observable.create<Int> {
+            subscriber->
+            run {
+                System.out.println("starting")
+                subscriber.onNext(5)
+                subscriber.onNext(6)
+                subscriber.onNext(7)
+                subscriber.onComplete()
+                System.out.println("completed")
+
+            }
+        }
+        observable.subscribe { System.out.println("next: $it") }
+    }
 }
