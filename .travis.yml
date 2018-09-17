@@ -29,6 +29,7 @@ android:
   - platform-tools
   - android-${ANDROID_API}
   - build-tools-${ANDROID_BUILD_TOOLS}
+  - build-tools-27.0.3
   - extra
 
 script:
