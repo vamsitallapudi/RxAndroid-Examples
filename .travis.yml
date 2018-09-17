@@ -31,6 +31,7 @@ android:
     - android-26
 
     # Additional components
+    - extra-android-support
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
@@ -50,9 +51,9 @@ before_script:
     - emulator -avd test -no-skin -no-audio -no-window &    #Start emulator
 
 script:
-    - echo "Travis branch is $TRAVIS_BRANCH"
-    - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
-    - android-wait-for-emulator
+      - echo no | avdmanager create avd --force -n test -k "system-images;android-19;default;armeabi-v7a"
+      - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+      - android-wait-for-emulator
     - adb devices   #Display list of devices
     - adb shell input keyevent 82 &
     - ./gradlew connectedCheck -PdisablePreDex --stacktrace
