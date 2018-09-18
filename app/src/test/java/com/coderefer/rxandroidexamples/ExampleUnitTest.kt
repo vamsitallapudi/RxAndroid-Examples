@@ -22,12 +22,12 @@ class ExampleUnitTest {
         val observable = Observable.create<Int> {
             subscriber->
             run {
-                System.out.println("starting")
+                println("starting")
                 subscriber.onNext(5)
                 subscriber.onNext(6)
                 subscriber.onNext(7)
                 subscriber.onComplete()
-                System.out.println("completed")
+                println("completed")
 
             }
         }
@@ -37,6 +37,6 @@ class ExampleUnitTest {
     @Test
     @Throws(Exception::class)
     fun addition_isCorrectFail() {
-        assertEquals(4, (2 + 5).toLong())
+        assertEquals(4, (2 + 2).toLong())
     }
 }
