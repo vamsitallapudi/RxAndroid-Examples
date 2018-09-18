@@ -33,4 +33,10 @@ class ExampleUnitTest {
         }
         observable.subscribe { System.out.println("next: $it") }
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun addition_isCorrectFail() {
+        assertEquals(4, (2 + 5).toLong())
+    }
 }
