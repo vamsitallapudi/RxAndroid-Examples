@@ -1,9 +1,12 @@
 package com.coderefer.rxandroidexamples
 
+import android.os.Handler
 import io.reactivex.Observable
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.mockito.Mockito.mock
+import java.util.concurrent.TimeUnit
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -38,5 +41,15 @@ class ExampleUnitTest {
     @Throws(Exception::class)
     fun addition_isCorrectFail() {
         assertEquals(4, (2 + 2).toLong())
+    }
+
+    @Test
+    fun testColdObservables() {
+        val mockHandler = mock(Handler::class.java)
+        val cold = Observable.interval(200,TimeUnit.MILLISECONDS)
+        cold.subscribe { i-> println("First: $i") }
+        mockHandler.postDelayed({}, 1000)
+        cold.subscribe{j ->println("Second: $j")}
+        Thread.sleep(10000)
     }
 }
