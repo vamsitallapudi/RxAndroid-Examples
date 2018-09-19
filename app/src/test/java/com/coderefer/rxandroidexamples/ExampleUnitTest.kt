@@ -45,10 +45,9 @@ class ExampleUnitTest {
 
     @Test
     fun testColdObservables() {
-        val mockHandler = mock(Handler::class.java)
         val cold = Observable.interval(200,TimeUnit.MILLISECONDS)
         cold.subscribe { i-> println("First: $i") }
-        mockHandler.postDelayed({}, 1000)
+        Thread.sleep(1000)
         cold.subscribe{j ->println("Second: $j")}
         Thread.sleep(10000)
     }
