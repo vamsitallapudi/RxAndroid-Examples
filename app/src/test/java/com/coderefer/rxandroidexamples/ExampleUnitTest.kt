@@ -4,7 +4,6 @@ import io.reactivex.Observable
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.mockito.Mockito.mock
 import java.util.concurrent.TimeUnit
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -47,11 +46,15 @@ class ExampleUnitTest {
 
     @Test
     fun testColdObservables() {
-        val cold = Observable.interval(200,TimeUnit.MILLISECONDS)
-        cold.subscribe { i-> println("First: $i") }
+        val cold = Observable.interval(200, TimeUnit.MILLISECONDS)
+        cold.subscribe { i -> println("First: $i") }
         Thread.sleep(1000)
-        cold.subscribe{j ->println("Second: $j")}
+        cold.subscribe { j -> println("Second: $j") }
         Thread.sleep(10000)
+
+    }
+
+    @Test
     fun testObserver_pattern() {
 //        this uses the consumer interface of java which only consists of a single method: accept()
         val observer = object : Observer<Int> {
