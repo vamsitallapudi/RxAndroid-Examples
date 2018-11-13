@@ -1,12 +1,14 @@
 package com.coderefer.rxandroidexamples
 
 import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.mockito.Mockito.mock
+import java.util.concurrent.TimeUnit
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -21,6 +23,35 @@ class ExampleUnitTest {
     }
 
     @Test
+    fun testCreate_withSubscriber() {
+        val observable = Observable.create<Int> {
+            subscriber->
+            run {
+                println("starting")
+                subscriber.onNext(5)
+                subscriber.onNext(6)
+                subscriber.onNext(7)
+                subscriber.onComplete()
+                println("completed")
+
+            }
+        }
+        observable.subscribe { System.out.println("next: $it") }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun addition_isCorrectFail() {
+        assertEquals(4, (2 + 2).toLong())
+    }
+
+    @Test
+    fun testColdObservables() {
+        val cold = Observable.interval(200,TimeUnit.MILLISECONDS)
+        cold.subscribe { i-> println("First: $i") }
+        Thread.sleep(1000)
+        cold.subscribe{j ->println("Second: $j")}
+        Thread.sleep(10000)
     fun testObserver_pattern() {
 //        this uses the consumer interface of java which only consists of a single method: accept()
         val observer = object : Observer<Int> {
