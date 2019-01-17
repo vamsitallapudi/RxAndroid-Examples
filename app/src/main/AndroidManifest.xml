@@ -11,7 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".intro.SimpleRxAndroidActivity">
         </activity>
-        <activity android:name=".intro.CreateOperatorActivity">
+        <activity android:name=".intro.operators.create.CreateOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.DeferOperatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

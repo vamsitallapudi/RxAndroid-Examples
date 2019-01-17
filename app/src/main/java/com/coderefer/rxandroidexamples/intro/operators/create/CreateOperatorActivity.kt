@@ -1,5 +1,5 @@
 /*
- * Copyright  © coderefer.com All Rights reserved.
+ * Copyright  © www.coderefer.com All Rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coderefer.rxandroidexamples.intro
+package com.coderefer.rxandroidexamples.intro.operators.create
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +24,7 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-private val TAG = "CreateOperatorActivity"
+private const val TAG = "CreateOperatorActivity"
 
 /**
  * Class to demonstrate create Operator
@@ -43,7 +43,7 @@ class CreateOperatorActivity : AppCompatActivity() {
     private fun initializeObserver(): Observer<Int> {
         return object : Observer<Int> {
             override fun onComplete() {
-
+                Log.d(TAG, "onComplete")
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -56,14 +56,15 @@ class CreateOperatorActivity : AppCompatActivity() {
             override fun onError(e: Throwable) {
 
             }
-
         }
     }
 
     private fun initializeObservable(): Observable<Int> {
+//        using create operator to create a new Observable
         return Observable.create {
             for (i in numList)
                 it.onNext(i)
+            it.onComplete()
         }
     }
 }
