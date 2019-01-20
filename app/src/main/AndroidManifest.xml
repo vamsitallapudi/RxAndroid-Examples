@@ -14,6 +14,14 @@
         <activity android:name=".intro.operators.create.CreateOperatorActivity">
         </activity>
         <activity android:name=".intro.operators.create.DeferOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.FromOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.IntervalOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.JustOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.JustOperPassingListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
