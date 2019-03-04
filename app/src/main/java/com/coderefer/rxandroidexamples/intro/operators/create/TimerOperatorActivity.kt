@@ -22,17 +22,17 @@ import android.util.Log
 import com.coderefer.rxandroidexamples.R
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
-private const val TAG = "JustOperPassList"
-class JustOperPassingListActivity : AppCompatActivity() {
+private const val TAG = "TimerOperator"
+class TimerOperatorActivity : AppCompatActivity() {
     private lateinit var disposable: Disposable
-    val list = listOf("a", "b", "c", "d")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_just_oper_passing_list)
 
-        val observable = Observable.just(list)
+        val observable = Observable.timer(1, TimeUnit.SECONDS)
 
         disposable = observable.subscribe {
             Log.d(TAG, it.toString())

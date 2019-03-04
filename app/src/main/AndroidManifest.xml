@@ -22,6 +22,12 @@
         <activity android:name=".intro.operators.create.JustOperatorActivity">
         </activity>
         <activity android:name=".intro.operators.create.JustOperPassingListActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.RangeOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.RepeatOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.create.TimerOperatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

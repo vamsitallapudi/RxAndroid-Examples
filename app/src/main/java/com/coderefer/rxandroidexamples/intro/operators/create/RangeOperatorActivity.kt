@@ -23,16 +23,16 @@ import com.coderefer.rxandroidexamples.R
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
-private const val TAG = "JustOperPassList"
-class JustOperPassingListActivity : AppCompatActivity() {
+
+private const val TAG = "RangeOperator"
+class RangeOperatorActivity : AppCompatActivity() {
     private lateinit var disposable: Disposable
-    val list = listOf("a", "b", "c", "d")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_just_oper_passing_list)
 
-        val observable = Observable.just(list)
+        val observable = Observable.range(7,5)
 
         disposable = observable.subscribe {
             Log.d(TAG, it.toString())
