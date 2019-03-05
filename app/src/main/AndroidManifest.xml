@@ -9,6 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".intro.operators.transform.MapOperatorActivity">
+        </activity>
+        <activity android:name=".intro.operators.transform.BufferOperatorActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".intro.SimpleRxAndroidActivity">
         </activity>
         <activity android:name=".intro.operators.create.CreateOperatorActivity">
@@ -28,11 +37,6 @@
         <activity android:name=".intro.operators.create.RepeatOperatorActivity">
         </activity>
         <activity android:name=".intro.operators.create.TimerOperatorActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 
