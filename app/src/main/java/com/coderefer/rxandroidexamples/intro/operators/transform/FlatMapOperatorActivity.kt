@@ -21,9 +21,9 @@ import android.os.Bundle
 import android.util.Log
 import com.coderefer.rxandroidexamples.R
 import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
-import kotlin.random.Random
-import io.reactivex.schedulers.TestScheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
+import io.reactivex.schedulers.Schedulers
 
 
 
@@ -31,26 +31,25 @@ import io.reactivex.schedulers.TestScheduler
 private const val TAG = "FlatMapOperator"
 class FlatMapOperatorActivity : AppCompatActivity() {
 
-    val items: List<Int> = listOf(1,2,3,4,5)
+    private val items: List<Int> = listOf(1,2,3,4,5)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flat_map_operator)
-        val scheduler = TestScheduler()
 
 
 
         Observable.fromIterable(items)
-                .flatMap {
-                    val delay = Random.nextLong(10L)
-                    Observable.just(it.toString() + "x")
-                            .delay(delay, TimeUnit.SECONDS, scheduler)
-                }
+                .flatMap (object : Function<Int, Observable<Int>> {
+                    override fun apply(t: Int): Observable<Int> {
+                        return Observable.just(t * 2)
+                    }
+                })
                 .doOnNext{
-                    Log.d(TAG, it)
+                    Log.d(TAG, it.toString())
                 }
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe()
-
-        scheduler.advanceTimeBy(1, TimeUnit.MINUTES)
     }
 }
