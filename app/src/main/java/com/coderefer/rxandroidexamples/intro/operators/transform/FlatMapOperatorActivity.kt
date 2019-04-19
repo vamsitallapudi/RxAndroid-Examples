@@ -40,11 +40,7 @@ class FlatMapOperatorActivity : AppCompatActivity() {
 
 
         Observable.fromIterable(items)
-                .flatMap (object : Function<Int, Observable<Int>> {
-                    override fun apply(t: Int): Observable<Int> {
-                        return Observable.just(t * 2)
-                    }
-                })
+                .flatMap { t -> Observable.just(t * 2) }
                 .doOnNext{
                     Log.d(TAG, it.toString())
                 }
