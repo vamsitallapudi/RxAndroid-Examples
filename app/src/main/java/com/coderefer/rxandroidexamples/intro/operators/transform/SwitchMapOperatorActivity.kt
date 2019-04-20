@@ -22,32 +22,38 @@ import android.util.Log
 import com.coderefer.rxandroidexamples.R
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
+private const val TAG = "SwitchMapOperator"
 
+class SwitchMapOperatorActivity : AppCompatActivity() {
 
-
-private const val TAG = "FlatMapOperator"
-class FlatMapOperatorActivity : AppCompatActivity() {
-
-    private val items: List<Int> = listOf(1,2,3,4,5)
+    lateinit var disposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_flat_map_operator)
+        setContentView(R.layout.activity_switch_map_operator)
+
+        val numList = arrayListOf(1, 2, 3, 4, 5)
 
 
-
-        Observable.fromIterable(items)
-                .flatMap {
-                    Observable.just(it * 2)
+        disposable = Observable.interval(0, 2, TimeUnit.SECONDS)
+                .switchMap {
+                    Observable.interval(0,750, TimeUnit.MILLISECONDS)
                 }
-                .doOnNext{
+                .doOnNext {
                     Log.d(TAG, it.toString())
                 }
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe()
+
+    }
+
+    override fun onDestroy() {
+        disposable.dispose()
+        super.onDestroy()
     }
 }
