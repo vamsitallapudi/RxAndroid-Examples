@@ -25,20 +25,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-
-private const val TAG = "FlatMapOperator"
-class FlatMapOperatorActivity : AppCompatActivity() {
+private const val TAG = "ConcatMapOperator"
+class ConcatMapOperatorActivity : AppCompatActivity() {
 
     private val items: List<Int> = listOf(1,2,3,4,5)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_flat_map_operator)
-
-
-
+        setContentView(R.layout.activity_concat_map_operator)
         Observable.fromIterable(items)
-                .flatMap {
+                .concatMap {
                     Observable.just(it * 2)
                             .delay(it/10L, TimeUnit.SECONDS)
                 }
